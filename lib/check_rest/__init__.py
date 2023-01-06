@@ -1,6 +1,8 @@
 import aiohttp
 import base64
+import logging
 from libprobe.asset import Asset
+from libprobe.exceptions import IgnoreResultException
 from typing import List, Dict
 
 
@@ -13,9 +15,11 @@ async def query(
     address = check_config.get('address')
     if not address:
         address = asset.name
-    assert asset_config, 'missing credentials'
-    username = asset_config['username']
-    password = asset_config['password']
+    username = asset_config.get('username')
+    password = asset_config.get('password')
+    if None in (username, password):
+        logging.error(f'missing credentails for {asset}')
+        raise IgnoreResultException
 
     url = f'https://{address}{route}'
 
