@@ -63,7 +63,7 @@ async def check_aggregate(
             'space_block_storage_volume_deduplication_space_saved_percent': item['space']['block_storage']['volume_deduplication_space_saved_percent'],
             'space_cloud_storage_used': item['space']['cloud_storage']['used'],
             'space_efficiency_logical_used': item['space']['efficiency']['logical_used'],
-            'space_efficiency_ratio': item['space']['efficiency']['ratio'],
+            'space_efficiency_ratio': float(item['space']['efficiency']['ratio']),
             'space_efficiency_savings': item['space']['efficiency']['savings'],
             'space_efficiency_without_snapshots_logical_used': item['space']['efficiency_without_snapshots']['logical_used'],
             'space_efficiency_without_snapshots_ratio': item['space']['efficiency_without_snapshots']['ratio'],

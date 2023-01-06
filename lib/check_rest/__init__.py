@@ -17,7 +17,7 @@ async def query(
     username = asset_config['username']
     password = asset_config['password']
 
-    url = f'{address}/{route}'
+    url = f'https://{address}{route}'
 
     auth_str = base64.encodebytes(
         f'{username}:{password}'.encode()).decode().replace('\n', '')
