@@ -35,5 +35,7 @@ async def query(
         async with session.get(url,
                                headers=headers,
                                ssl=False) as resp:
-            data = await resp.json()
+            # disable content-type check becuase not sure if this is always
+            # iso-8859-1
+            data = await resp.json(content_type=None)
             return data
