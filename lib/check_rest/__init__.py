@@ -28,6 +28,7 @@ async def query(
     headers = {
         'authorization': f'Basic {auth_str}',
         'content-type': 'application/json',
+        'accept': 'application/json',
     }
 
     async with aiohttp.ClientSession() as session:
