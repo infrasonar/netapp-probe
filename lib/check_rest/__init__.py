@@ -38,4 +38,5 @@ async def query(
             # disable content-type check becuase not sure if this is always
             # iso-8859-1
             data = await resp.json(content_type=None)
+            resp.raise_for_status()
             return data
