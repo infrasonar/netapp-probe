@@ -10,6 +10,7 @@ async def check_snapmirror(
     data = await query(asset, asset_config, check_config, url)
     return {
         'snapmirror': [{
+            'name': item['name'],
             # TODO metrics
         } for item in data['records']]
     }

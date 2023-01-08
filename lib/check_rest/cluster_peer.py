@@ -10,6 +10,7 @@ async def check_cluster_peer(
     data = await query(asset, asset_config, check_config, url)
     return {
         'cluster_peer': [{
+            'name': item['name'],
             # TODO metrics
         } for item in data['records']]
     }

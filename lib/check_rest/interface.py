@@ -6,11 +6,11 @@ async def check_interface(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/network/ip/interfaces?fields=statistics,metric,*'
+    url = '/api/network/ip/interfaces?fields=**'
     data = await query(asset, asset_config, check_config, url)
     return {
         'interface': [{
-            'dns_zone': item['dns_zone'],
+            'dns_zone': item.get('dns_zone'),  # 9.9
             'enabled': item['enabled'],
             'ip_address': item['ip']['address'],
             'ip_family': item['ip']['family'],
@@ -30,22 +30,22 @@ async def check_interface(
             'location_port_name': item['location']['port']['name'],
             'location_port_node_name': item['location']['port']['node']['name'],
             'location_port_uuid': item['location']['port']['uuid'],
-            'metric_duration': item['metric']['duration'],
-            'metric_status': item['metric']['status'],
-            'metric_throughput_read': item['metric']['throughput']['read'],
-            'metric_throughput_total': item['metric']['throughput']['total'],
-            'metric_throughput_write': item['metric']['throughput']['write'],
-            'metric_timestamp': item['metric']['timestamp'],
+            **({'metric_duration': item['metric']['duration'],
+                'metric_status': item['metric']['status'],
+                'metric_throughput_read': item['metric']['throughput']['read'],
+                'metric_throughput_total': item['metric']['throughput']['total'],
+                'metric_throughput_write': item['metric']['throughput']['write'],
+                'metric_timestamp': item['metric']['timestamp'], } if 'metric' in item else {}),  # 9.8
             'name': item['name'],
             'scope': item['scope'],
             'service_policy_name': item['service_policy']['name'],
             'service_policy_uuid': item['service_policy']['uuid'],
             'state': item['state'],
-            'statistics_status': item['statistics']['status'],
-            'statistics_throughput_raw_read': item['statistics']['throughput_raw']['read'],
-            'statistics_throughput_raw_total': item['statistics']['throughput_raw']['total'],
-            'statistics_throughput_raw_write': item['statistics']['throughput_raw']['write'],
-            'statistics_timestamp': item['statistics']['timestamp'],
+            **({'statistics_status': item['statistics']['status'],
+                'statistics_throughput_raw_read': item['statistics']['throughput_raw']['read'],
+                'statistics_throughput_raw_total': item['statistics']['throughput_raw']['total'],
+                'statistics_throughput_raw_write': item['statistics']['throughput_raw']['write'],
+                'statistics_timestamp': item['statistics']['timestamp'], } if 'statistics' in item else {}),  # 9.8
             'uuid': item['uuid'],
             'vip': item['vip'],
         } for item in data['records']]

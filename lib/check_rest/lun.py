@@ -10,6 +10,7 @@ async def check_lun(
     data = await query(asset, asset_config, check_config, url)
     return {
         'lun': [{
+            'name': item['name'],
             # TODO metrics
         } for item in data['records']]
     }

@@ -6,7 +6,7 @@ async def check_fcp(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/network/fc/ports?fields=statistics,metric,*'
+    url = '/api/network/fc/ports?fields=**'
     data = await query(asset, asset_config, check_config, url)
     return {
         'fcp': [{
@@ -23,7 +23,7 @@ async def check_fcp(
             'speed_configured': item['speed']['configured'],
             'speed_maximum': item['speed']['maximum'],
             'state': item['state'],
-            'transceiver_form_factor': item['transceiver']['form_factor'],
+            'transceiver_form_factor': item['transceiver'].get('form_factor'),  # 9.8
             'transceiver_manufacturer': item['transceiver']['manufacturer'],
             'transceiver_part_number': item['transceiver']['part_number'],
             'uuid': item['uuid'],

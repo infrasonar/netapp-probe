@@ -10,6 +10,7 @@ async def check_cifs_options(
     data = await query(asset, asset_config, check_config, url)
     return {
         'cifs_options': [{
+            'name': item['name'],
             # TODO metrics
         } for item in data['records']]
     }

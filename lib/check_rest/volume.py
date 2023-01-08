@@ -6,18 +6,18 @@ async def check_volume(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/storage/volumes?fields=statistics,metric,*'
+    url = '/api/storage/volumes?fields=statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
         'volume': [{
-            'activity_tracking_state': item['activity_tracking']['state'],
-            'activity_tracking_supported': item['activity_tracking']['supported'],
-            'analytics_state': item['analytics']['state'],
+            **({'activity_tracking_state': item['activity_tracking']['state'],
+                'activity_tracking_supported': item['activity_tracking']['supported'], } if 'activity_tracking' in item else {}),  # 9.10
+            **({'analytics_state': item['analytics']['state'], } if 'analytics' in item else {}),  # 9.8
             'clone_is_flexclone': item['clone']['is_flexclone'],
-            'cloud_retrieval_policy': item['cloud_retrieval_policy'],
+            'cloud_retrieval_policy': item.get('cloud_retrieval_policy'),  # 9.8
             'comment': item['comment'],
             'create_time': item['create_time'],
-            'efficiency_state': item['efficiency']['state'],
+            'efficiency_state': item['efficiency'].get('state'),  # 9.9
             'efficiency_volume_path': item['efficiency']['volume_path'],
             'language': item['language'],
             'metric_duration': item['metric']['duration'],
@@ -39,10 +39,10 @@ async def check_volume(
             'nas_export_policy_name': item['nas']['export_policy']['name'],
             'scheduled_snapshot_naming_scheme': item['scheduled_snapshot_naming_scheme'],
             'size': item['size'],
-            'snapmirror_destinations_is_cloud': item['snapmirror']['destinations']['is_cloud'],
-            'snapmirror_destinations_is_ontap': item['snapmirror']['destinations']['is_ontap'],
-            'snapmirror_is_protected': item['snapmirror']['is_protected'],
-            'snapshot_count': item['snapshot_count'],
+            **({'snapmirror_destinations_is_cloud': item['snapmirror']['destinations']['is_cloud'],
+                'snapmirror_destinations_is_ontap': item['snapmirror']['destinations']['is_ontap'],
+                'snapmirror_is_protected': item['snapmirror']['is_protected'], } if 'snapmirror' in item else {}),  # 9.7
+            'snapshot_count': item.get('snapshot_count'),  # 9.10
             'snapshot_policy_name': item['snapshot_policy']['name'],
             'space_available': item['space']['available'],
             'space_size': item['space']['size'],
