@@ -33,7 +33,7 @@ async def check_cluster_node(
                 'nvram_id': item['nvram']['id'], } if 'nvram' in item else {}),  # 9.9
             'owner': item.get('owner'),  # 9.9
             'serial_number': item['serial_number'],
-            'service_processor_ipv6_interface_enabled': item['service_processor']['ipv6_interface']['enabled'],
+            # 'service_processor_ipv6_interface_enabled': item['service_processor']['ipv6_interface']['enabled'],
             'service_processor_state': item['service_processor']['state'],
             'state': item.get('state'),  # 9.7
             **({'statistics_processor_utilization_base': item['statistics']['processor_utilization_base'],

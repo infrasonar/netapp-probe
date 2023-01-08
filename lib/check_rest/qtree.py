@@ -16,7 +16,7 @@ async def check_qtree(
             'id': item['id'],
             'name': item['name'],
             **({'nas_path': item['nas']['path'], } if 'nas' in item else {}),  # 9.9
-            'path': item['path'],
+            # 'path': item['path'],
             'security_style': item['security_style'],
             **({'statistics_iops_raw_other': item['statistics']['iops_raw']['other'],
                 'statistics_iops_raw_read': item['statistics']['iops_raw']['read'],

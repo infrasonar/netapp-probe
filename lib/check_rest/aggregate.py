@@ -71,11 +71,11 @@ async def check_aggregate(
             **({'space_efficiency_without_snapshots_flexclones_logical_used': item['space']['efficiency_without_snapshots_flexclones']['logical_used'],
                 'space_efficiency_without_snapshots_flexclones_ratio': item['space']['efficiency_without_snapshots_flexclones']['ratio'],
                 'space_efficiency_without_snapshots_flexclones_savings': item['space']['efficiency_without_snapshots_flexclones']['savings'], } if 'efficiency_without_snapshots_flexclones' in item['space'] else {}),  # 9.9
-            'space_snapshot_available': item['space']['snapshot'].get('available'),  # 9.10
-            'space_snapshot_reserve_percent': item['space']['snapshot']['reserve_percent'],
-            'space_snapshot_total': item['space']['snapshot'].get('total'),  # 9.10
-            'space_snapshot_used': item['space']['snapshot']['used'],
-            'space_snapshot_used_percent': item['space']['snapshot'].get('used_percent'),  # 9.10
+            # 'space_snapshot_available': item['space']['snapshot'].get('available'),  # 9.10
+            # 'space_snapshot_reserve_percent': item['space']['snapshot']['reserve_percent'],
+            # 'space_snapshot_total': item['space']['snapshot'].get('total'),  # 9.10
+            # 'space_snapshot_used': item['space']['snapshot']['used'],
+            # 'space_snapshot_used_percent': item['space']['snapshot'].get('used_percent'),  # 9.10
             'state': item['state'],
             **({'statistics_iops_raw_other': item['statistics']['iops_raw']['other'],
                 'statistics_iops_raw_read': item['statistics']['iops_raw']['read'],

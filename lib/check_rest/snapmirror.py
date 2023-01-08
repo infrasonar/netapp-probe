@@ -10,6 +10,7 @@ async def check_snapmirror(
     data = await query(asset, asset_config, check_config, url)
     return {
         'snapmirror': [{
+            'name': item['uuid'],
             'exported_snapshot': item['exported_snapshot'],
             'group_type': item.get('group_type'),  # 9.11
             'healthy': item['healthy'],
@@ -33,6 +34,5 @@ async def check_snapmirror(
             'transfer_uuid': item['transfer']['uuid'],
             **({'transfer_schedule_name': item['transfer_schedule']['name'],
                 'transfer_schedule_uuid': item['transfer_schedule']['uuid'], } if 'transfer_schedule' in item else {}),  # 9.11
-            'uuid': item['uuid'],
         } for item in data['records']]
     }

@@ -17,8 +17,8 @@ async def check_volume(
             'cloud_retrieval_policy': item.get('cloud_retrieval_policy'),  # 9.8
             'comment': item['comment'],
             'create_time': item['create_time'],
-            'efficiency_state': item['efficiency'].get('state'),  # 9.9
-            'efficiency_volume_path': item['efficiency']['volume_path'],
+            # 'efficiency_state': item['efficiency'].get('state'),  # 9.9
+            # 'efficiency_volume_path': item['efficiency']['volume_path'],
             'language': item['language'],
             'metric_duration': item['metric']['duration'],
             'metric_iops_other': item['metric']['iops']['other'],

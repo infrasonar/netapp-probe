@@ -10,9 +10,9 @@ async def check_interface_ports(
     data = await query(asset, asset_config, check_config, url)
     return {
         'port': [{
-            'broadcast_domain_ipspace_name': item['broadcast_domain']['ipspace']['name'],
-            'broadcast_domain_name': item['broadcast_domain']['name'],
-            'broadcast_domain_uuid': item['broadcast_domain']['uuid'],
+            # 'broadcast_domain_ipspace_name': item['broadcast_domain']['ipspace']['name'],
+            # 'broadcast_domain_name': item['broadcast_domain']['name'],
+            # 'broadcast_domain_uuid': item['broadcast_domain']['uuid'],
             'enabled': item['enabled'],
             'mac_address': item['mac_address'],
             **({'metric_duration': item['metric']['duration'],

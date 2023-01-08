@@ -12,7 +12,7 @@ async def check_lun(
         'lun': [{
             **({'attributes_name': item['attributes']['name'],
                 'attributes_value': item['attributes']['value'], } if 'attributes' in item else {}),  # 9.10
-            'auto_delete': item['auto_delete'],
+            # 'auto_delete': item['auto_delete'],
             'class': item['class'],
             'clone_source_name': item['clone']['source']['name'],
             'clone_source_uuid': item['clone']['source']['uuid'],

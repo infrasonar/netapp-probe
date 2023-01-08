@@ -23,9 +23,9 @@ async def check_fcp(
             'speed_configured': item['speed']['configured'],
             'speed_maximum': item['speed']['maximum'],
             'state': item['state'],
-            'transceiver_form_factor': item['transceiver'].get('form_factor'),  # 9.8
-            'transceiver_manufacturer': item['transceiver']['manufacturer'],
-            'transceiver_part_number': item['transceiver']['part_number'],
+            # 'transceiver_form_factor': item['transceiver'].get('form_factor'),  # 9.8
+            # 'transceiver_manufacturer': item['transceiver']['manufacturer'],
+            # 'transceiver_part_number': item['transceiver']['part_number'],
             'uuid': item['uuid'],
             'wwnn': item['wwnn'],
             'wwpn': item['wwpn'],
