@@ -6,7 +6,7 @@ async def check_lun(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/storage/luns?fields=statistics,metric,*'
+    url = '/api/storage/luns?fields=**'
     data = await query(asset, asset_config, check_config, url)
     return {
         'lun': [{
