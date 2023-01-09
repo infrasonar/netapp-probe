@@ -63,13 +63,13 @@ async def check_aggregate(
             'space_block_storage_volume_deduplication_space_saved_percent': item.get('space', {}).get('block_storage', {}).get('volume_deduplication_space_saved_percent'),  # 9.10
             'space_cloud_storage_used': item.get('space', {}).get('cloud_storage', {}).get('used'),
             'space_efficiency_logical_used': item.get('space', {}).get('efficiency', {}).get('logical_used'),
-            'space_efficiency_ratio': float(item.get('space', {}).get('efficiency', {}).get('ratio')),
+            'space_efficiency_ratio': float(item['space']['efficiency']['ratio']) if 'ratio' in item.get('space', {}).get('efficiency', {}) else None,
             'space_efficiency_savings': item.get('space', {}).get('efficiency', {}).get('savings'),
             'space_efficiency_without_snapshots_logical_used': item.get('space', {}).get('efficiency_without_snapshots', {}).get('logical_used'),
-            'space_efficiency_without_snapshots_ratio': item.get('space', {}).get('efficiency_without_snapshots', {}).get('ratio'),
+            'space_efficiency_without_snapshots_ratio': float(item['space']['efficiency_without_snapshots']['ratio']) if 'ratio' in item.get('space', {}).get('efficiency_without_snapshots', {}) else None,
             'space_efficiency_without_snapshots_savings': item.get('space', {}).get('efficiency_without_snapshots', {}).get('savings'),
             'space_efficiency_without_snapshots_flexclones_logical_used': item.get('space', {}).get('efficiency_without_snapshots_flexclones', {}).get('logical_used'),
-            'space_efficiency_without_snapshots_flexclones_ratio': item.get('space', {}).get('efficiency_without_snapshots_flexclones', {}).get('ratio'),
+            'space_efficiency_without_snapshots_flexclones_ratio': float(item['space']['efficiency_without_snapshots_flexclones']['ratio']) if 'ratio' in item.get('space', {}).get('efficiency_without_snapshots_flexclones', {}) else None,
             'space_efficiency_without_snapshots_flexclones_savings': item.get('space', {}).get('efficiency_without_snapshots_flexclones', {}).get('savings'),  # 9.9
             'space_snapshot_available': item.get('space', {}).get('snapshot', {}).get('available'),  # 9.10
             'space_snapshot_reserve_percent': item.get('space', {}).get('snapshot', {}).get('reserve_percent'),
