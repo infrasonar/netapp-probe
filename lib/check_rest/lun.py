@@ -10,8 +10,6 @@ async def check_lun(
     data = await query(asset, asset_config, check_config, url)
     return {
         'lun': [{
-            **({'attributes_name': item['attributes']['name'],
-                'attributes_value': item['attributes']['value'], } if 'attributes' in item else {}),  # 9.10
             # 'auto_delete': item['auto_delete'],
             'class': item['class'],
             'clone_source_name': item['clone']['source']['name'],
@@ -21,14 +19,7 @@ async def check_lun(
                 'consistency_group_uuid': item['consistency_group']['uuid'], } if 'consistency_group' in item else {}),  # 9.10
             **({'convert_namespace_name': item['convert']['namespace']['name'],
                 'convert_namespace_uuid': item['convert']['namespace']['uuid'], } if 'convert' in item else {}),  # 9.11
-            **({'copy_destinations_max_throughput': item['copy']['destinations']['max_throughput'],
-                'copy_destinations_name': item['copy']['destinations']['name'],
-                'copy_destinations_progress_elapsed': item['copy']['destinations']['progress']['elapsed'],
-                'copy_destinations_progress_percent_complete': item['copy']['destinations']['progress']['percent_complete'],
-                'copy_destinations_progress_state': item['copy']['destinations']['progress']['state'],
-                'copy_destinations_progress_volume_snapshot_blocked': item['copy']['destinations']['progress']['volume_snapshot_blocked'],
-                'copy_destinations_uuid': item['copy']['destinations']['uuid'],
-                'copy_source_max_throughput': item['copy']['source']['max_throughput'],
+            **({'copy_source_max_throughput': item['copy']['source']['max_throughput'],
                 'copy_source_name': item['copy']['source']['name'],
                 'copy_source_progress_elapsed': item['copy']['source']['progress']['elapsed'],
                 'copy_source_progress_percent_complete': item['copy']['source']['progress']['percent_complete'],
@@ -44,9 +35,6 @@ async def check_lun(
             'location_qtree_name': item['location']['qtree']['name'],
             'location_volume_name': item['location']['volume']['name'],
             'location_volume_uuid': item['location']['volume']['uuid'],
-            'lun_maps_igroup_name': item['lun_maps']['igroup']['name'],
-            'lun_maps_igroup_uuid': item['lun_maps']['igroup']['uuid'],
-            'lun_maps_logical_unit_number': item['lun_maps']['logical_unit_number'],
             **({'metric_duration': item['metric']['duration'],
                 'metric_iops_other': item['metric']['iops']['other'],
                 'metric_iops_read': item['metric']['iops']['read'],
@@ -100,9 +88,6 @@ async def check_lun(
             'svm_name': item['svm']['name'],
             'svm_uuid': item['svm']['uuid'],
             'uuid': item['uuid'],
-            **({'vvol_bindings_id': item['vvol']['bindings']['id'],
-                'vvol_bindings_partner_name': item['vvol']['bindings']['partner']['name'],
-                'vvol_bindings_partner_uuid': item['vvol']['bindings']['partner']['uuid'],
-                'vvol_is_bound': item['vvol']['is_bound'], } if 'vvol' in item else {}),  # 9.10
+            **({'vvol_is_bound': item['vvol']['is_bound'], } if 'vvol' in item else {}),  # 9.10
         } for item in data['records']]
     }
