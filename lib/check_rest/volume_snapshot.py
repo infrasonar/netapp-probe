@@ -6,7 +6,7 @@ from ..utils import datetime_to_ts
 THROTTLE = .2
 
 
-async def check_snapshot(
+async def check_volume_snapshot(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:

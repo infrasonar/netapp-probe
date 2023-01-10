@@ -3,7 +3,7 @@ from . import query
 from ..utils import datetime_to_ts
 
 
-async def check_interface_ports(
+async def check_interface_port(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
@@ -27,7 +27,7 @@ async def check_interface_ports(
             'node_name': item.get('node', {}).get('name'),
             'node_uuid': item.get('node', {}).get('uuid'),
             'reachability': item.get('reachability'),  # 9.8
-            'speed': item.get('speed'),
+            'speed': item.get('speed') if isinstance(item.get('speed'), int) else None,
             'state': item.get('state'),
             'statistics_device_link_down_count_raw': item.get('statistics', {}).get('device', {}).get('link_down_count_raw'),
             'statistics_device_receive_raw_discards': item.get('statistics', {}).get('device', {}).get('receive_raw', {}).get('discards'),
