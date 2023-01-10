@@ -1,18 +1,20 @@
 from libprobe.asset import Asset
 from . import query
+from ..utils import datetime_to_ts
 
 
 async def check_volume(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/storage/volumes?fields=statistics,*'
+    url = '/api/storage/volumes?fields=autosize,space,statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
         'volume': [{
             'activity_tracking_state': item.get('activity_tracking', {}).get('state'),
             'activity_tracking_supported': item.get('activity_tracking', {}).get('supported'),  # 9.10
             'analytics_state': item.get('analytics', {}).get('state'),  # 9.8
+            'autosize_mode': item.get('autosize', {}).get('mode'),
             'clone_is_flexclone': item.get('clone', {}).get('is_flexclone'),
             'cloud_retrieval_policy': item.get('cloud_retrieval_policy'),  # 9.8
             'comment': item.get('comment'),
@@ -34,7 +36,7 @@ async def check_volume(
             'metric_throughput_read': item.get('metric', {}).get('throughput', {}).get('read'),
             'metric_throughput_total': item.get('metric', {}).get('throughput', {}).get('total'),
             'metric_throughput_write': item.get('metric', {}).get('throughput', {}).get('write'),
-            'metric_timestamp': item.get('metric', {}).get('timestamp'),
+            'metric_timestamp': datetime_to_ts(item.get('metric', {}).get('timestamp')),
             'name': item.get('name'),
             'nas_export_policy_name': item.get('nas', {}).get('export_policy', {}).get('name'),
             'scheduled_snapshot_naming_scheme': item.get('scheduled_snapshot_naming_scheme'),
@@ -44,8 +46,12 @@ async def check_volume(
             'snapmirror_is_protected': item.get('snapmirror', {}).get('is_protected'),  # 9.7
             'snapshot_count': item.get('snapshot_count'),  # 9.10
             'snapshot_policy_name': item.get('snapshot_policy', {}).get('name'),
+            'space_afs_total': item.get('space', {}).get('afs_total'),
             'space_available': item.get('space', {}).get('available'),
+            'space_percent_used': item.get('space', {}).get('percent_used'),
             'space_size': item.get('space', {}).get('size'),
+            'space_size_available_for_snapshots': item.get('space', {}).get('size_available_for_snapshots'),
+            'space_snapshot_reserve_size': item.get('space', {}).get('snapshot', {}).get('reserve_size'),
             'space_used': item.get('space', {}).get('used'),
             'state': item.get('state'),
             'statistics_iops_raw_other': item.get('statistics', {}).get('iops_raw', {}).get('other'),
@@ -61,7 +67,7 @@ async def check_volume(
             'statistics_throughput_raw_read': item.get('statistics', {}).get('throughput_raw', {}).get('read'),
             'statistics_throughput_raw_total': item.get('statistics', {}).get('throughput_raw', {}).get('total'),
             'statistics_throughput_raw_write': item.get('statistics', {}).get('throughput_raw', {}).get('write'),
-            'statistics_timestamp': item.get('statistics', {}).get('timestamp'),
+            'statistics_timestamp': datetime_to_ts(item.get('statistics', {}).get('timestamp')),
             'style': item.get('style'),
             'svm_name': item.get('svm', {}).get('name'),
             'svm_uuid': item.get('svm', {}).get('uuid'),

@@ -1,5 +1,6 @@
 from libprobe.asset import Asset
 from . import query
+from ..utils import datetime_to_ts
 
 
 async def check_lun(
@@ -49,7 +50,7 @@ async def check_lun(
             'metric_throughput_read': item.get('metric', {}).get('throughput', {}).get('read'),
             'metric_throughput_total': item.get('metric', {}).get('throughput', {}).get('total'),
             'metric_throughput_write': item.get('metric', {}).get('throughput', {}).get('write'),
-            'metric_timestamp': item.get('metric', {}).get('timestamp'),  # 9.7
+            'metric_timestamp': datetime_to_ts(item.get('metric', {}).get('timestamp')),  # 9.7
             'movement_max_throughput': item.get('movement', {}).get('max_throughput'),
             'movement_paths_destination': item.get('movement', {}).get('paths', {}).get('destination'),
             'movement_paths_source': item.get('movement', {}).get('paths', {}).get('source'),
@@ -80,7 +81,7 @@ async def check_lun(
             'statistics_throughput_raw_read': item.get('statistics', {}).get('throughput_raw', {}).get('read'),
             'statistics_throughput_raw_total': item.get('statistics', {}).get('throughput_raw', {}).get('total'),
             'statistics_throughput_raw_write': item.get('statistics', {}).get('throughput_raw', {}).get('write'),
-            'statistics_timestamp': item.get('statistics', {}).get('timestamp'),  # 9.7
+            'statistics_timestamp': datetime_to_ts(item.get('statistics', {}).get('timestamp')),  # 9.7
             'status_container_state': item.get('status', {}).get('container_state'),
             'status_mapped': item.get('status', {}).get('mapped'),
             'status_read_only': item.get('status', {}).get('read_only'),

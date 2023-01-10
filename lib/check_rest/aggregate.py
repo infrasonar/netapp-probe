@@ -1,5 +1,6 @@
 from libprobe.asset import Asset
 from . import query
+from ..utils import datetime_to_ts
 
 
 async def check_aggregate(
@@ -40,7 +41,7 @@ async def check_aggregate(
             'metric_throughput_read': item.get('metric', {}).get('throughput', {}).get('read'),
             'metric_throughput_total': item.get('metric', {}).get('throughput', {}).get('total'),
             'metric_throughput_write': item.get('metric', {}).get('throughput', {}).get('write'),
-            'metric_timestamp': item.get('metric', {}).get('timestamp'),  # 9.7
+            'metric_timestamp': datetime_to_ts(item.get('metric', {}).get('timestamp')),  # 9.7
             'name': item.get('name'),
             'node_name': item.get('node', {}).get('name'),
             'node_uuid': item.get('node', {}).get('uuid'),
@@ -90,7 +91,7 @@ async def check_aggregate(
             'statistics_throughput_raw_read': item.get('statistics', {}).get('throughput_raw', {}).get('read'),
             'statistics_throughput_raw_total': item.get('statistics', {}).get('throughput_raw', {}).get('total'),
             'statistics_throughput_raw_write': item.get('statistics', {}).get('throughput_raw', {}).get('write'),
-            'statistics_timestamp': item.get('statistics', {}).get('timestamp'),  # 9.7
+            'statistics_timestamp': datetime_to_ts(item.get('statistics', {}).get('timestamp')),  # 9.7
             'uuid': item.get('uuid'),
         } for item in data['records']],
     }
