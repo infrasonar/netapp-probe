@@ -1,5 +1,10 @@
+from datetime import datetime
 from typing import Callable, Optional, List
 from xml.etree.ElementTree import Element
+
+
+def datetime_to_ts(ds: str) -> int:
+    return int(datetime.fromisoformat(ds).timestamp())
 
 
 def _flatten(node: Element, path: Optional[List[str]] = []):

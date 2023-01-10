@@ -27,16 +27,13 @@ async def query(
         f'{username}:{password}'.encode()).decode().replace('\n', '')
     headers = {
         'authorization': f'Basic {auth_str}',
-        'content-type': 'application/json',
-        'accept': 'application/json',
+        'accept': 'application/hal+json',
     }
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url,
                                headers=headers,
                                ssl=False) as resp:
-            # disable content-type check becuase not sure if this is always
-            # iso-8859-1
-            data = await resp.json(content_type=None)
+            data = await resp.json(content_type='application/hal+json')
             resp.raise_for_status()
             return data
