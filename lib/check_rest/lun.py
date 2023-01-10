@@ -27,7 +27,7 @@ async def check_lun(
             'copy_source_progress_state': item.get('copy', {}).get('source', {}).get('progress', {}).get('state'),
             'copy_source_progress_volume_snapshot_blocked': item.get('copy', {}).get('source', {}).get('progress', {}).get('volume_snapshot_blocked'),
             'copy_source_uuid': item.get('copy', {}).get('source', {}).get('uuid'),  # 9.10
-            'create_time': item.get('create_time'),  # 9.7
+            'create_time': datetime_to_ts(item.get('create_time')),  # 9.7
             'enabled': item.get('enabled'),
             'location_logical_unit': item.get('location', {}).get('logical_unit'),
             'location_node_name': item.get('location', {}).get('node', {}).get('name'),

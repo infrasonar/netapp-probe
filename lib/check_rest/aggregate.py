@@ -21,7 +21,7 @@ async def check_aggregate(
             'block_storage_primary_raid_size': item.get('block_storage', {}).get('primary', {}).get('raid_size'),
             'block_storage_primary_raid_type': item.get('block_storage', {}).get('primary', {}).get('raid_type'),
             'cloud_storage_attach_eligible': item.get('cloud_storage', {}).get('attach_eligible'),
-            'create_time': item.get('create_time'),
+            'create_time': datetime_to_ts(item.get('create_time')),
             'data_encryption_drive_protection_enabled': item.get('data_encryption', {}).get('drive_protection_enabled'),
             'data_encryption_software_encryption_enabled': item.get('data_encryption', {}).get('software_encryption_enabled'),
             'home_node_name': item.get('home_node', {}).get('name'),

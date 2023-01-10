@@ -1,5 +1,6 @@
 from libprobe.asset import Asset
 from . import query
+from ..utils import datetime_to_ts
 
 
 async def check_cluster_peer(
@@ -10,7 +11,7 @@ async def check_cluster_peer(
     data = await query(asset, asset_config, check_config, url)
     return {
         'cluster_peer': [{
-            'authentication_expiry_time': item.get('authentication', {}).get('expiry_time'),
+            'authentication_expiry_time': datetime_to_ts(item.get('authentication', {}).get('expiry_time')),
             'authentication_generate_passphrase': item.get('authentication', {}).get('generate_passphrase'),
             'authentication_in_use': item.get('authentication', {}).get('in_use'),
             'authentication_passphrase': item.get('authentication', {}).get('passphrase'),
@@ -26,7 +27,7 @@ async def check_cluster_peer(
             'remote_name': item.get('remote', {}).get('name'),
             'remote_serial_number': item.get('remote', {}).get('serial_number'),
             'status_state': item.get('status', {}).get('state'),
-            'status_update_time': item.get('status', {}).get('update_time'),
+            'status_update_time': datetime_to_ts(item.get('status', {}).get('update_time')),
             'uuid': item.get('uuid'),
             'version_full': item.get('version', {}).get('full'),
             'version_generation': item.get('version', {}).get('generation'),

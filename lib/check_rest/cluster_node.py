@@ -21,7 +21,7 @@ async def check_cluster_node(
             'controller_failed_power_supply_message_message': item.get('controller', {}).get('failed_power_supply', {}).get('message', {}).get('message'),  # 9.9
             'controller_memory_size': item.get('controller', {}).get('memory_size'),  # 9.9
             'controller_over_temperature': item.get('controller', {}).get('over_temperature'),
-            'date': item.get('date'),
+            'date': datetime_to_ts(item.get('date')),
             'location': item.get('location'),
             'membership': item.get('membership'),
             'metric_duration': item.get('metric', {}).get('duration'),

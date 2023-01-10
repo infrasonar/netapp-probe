@@ -1,5 +1,6 @@
 from libprobe.asset import Asset
 from . import query
+from ..utils import datetime_to_ts
 
 
 async def check_snapmirror(
@@ -28,7 +29,7 @@ async def check_snapmirror(
             'state': item.get('state'),
             'throttle': item.get('throttle'),  # 9.12
             'transfer_bytes_transferred': item.get('transfer', {}).get('bytes_transferred'),
-            'transfer_end_time': item.get('transfer', {}).get('end_time'),
+            'transfer_end_time': datetime_to_ts(item.get('transfer', {}).get('end_time')),
             'transfer_state': item.get('transfer', {}).get('state'),
             'transfer_total_duration': item.get('transfer', {}).get('total_duration'),
             'transfer_uuid': item.get('transfer', {}).get('uuid'),

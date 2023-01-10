@@ -18,7 +18,7 @@ async def check_volume(
             'clone_is_flexclone': item.get('clone', {}).get('is_flexclone'),
             'cloud_retrieval_policy': item.get('cloud_retrieval_policy'),  # 9.8
             'comment': item.get('comment'),
-            'create_time': item.get('create_time'),
+            'create_time': datetime_to_ts(item.get('create_time')),
             'efficiency_state': item.get('efficiency', {}).get('state'),  # 9.9
             'efficiency_volume_path': item.get('efficiency', {}).get('volume_path'),
             'language': item.get('language'),
