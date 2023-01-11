@@ -3,6 +3,15 @@ from . import query
 from ..utils import datetime_to_ts
 
 
+def space_percent_used(item: dict):
+    available = item.get('space', {}).get('available')
+    size = item.get('space', {}).get('size')
+    try:
+        return round((1 - available / size) * 100)
+    except Exception:
+        return None
+
+
 async def check_volume(
         asset: Asset,
         asset_config: dict,
@@ -48,7 +57,7 @@ async def check_volume(
             'snapshot_policy_name': item.get('snapshot_policy', {}).get('name'),
             'space_afs_total': item.get('space', {}).get('afs_total'),
             'space_available': item.get('space', {}).get('available'),
-            'space_percent_used': item.get('space', {}).get('percent_used'),
+            'space_percent_used': space_percent_used(item),
             'space_size': item.get('space', {}).get('size'),
             'space_size_available_for_snapshots': item.get('space', {}).get('size_available_for_snapshots'),
             'space_snapshot_reserve_size': item.get('space', {}).get('snapshot', {}).get('reserve_size'),
