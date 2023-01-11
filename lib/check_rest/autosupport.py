@@ -14,10 +14,10 @@ async def check_autosupport(
     autosupport = {
         'name': 'autosupport',
         'contact_support': data.get('contact_support'),
-        'enabled': data.get('contact_support'),
+        'enabled': data.get('enabled'),
         'from': data.get('from'),
         'is_minimal': data.get('is_minimal'),
-        'mail_hosts': data.get('is_minimal'),
+        'mail_hosts': data.get('mail_hosts'),
         'proxy_url': data.get('proxy_url'),
         'transport': data.get('transport'),
     }
