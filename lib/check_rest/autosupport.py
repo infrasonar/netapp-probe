@@ -11,7 +11,7 @@ async def check_autosupport(
     url = '/api/support/autosupport?fields=issues,*'
     data = await query(asset, asset_config, check_config, url)
 
-    autosupport = {
+    autosupport = [{
         'name': 'autosupport',
         'contact_support': data.get('contact_support'),
         'enabled': data.get('enabled'),
@@ -20,7 +20,7 @@ async def check_autosupport(
         'mail_hosts': data.get('mail_hosts'),
         'proxy_url': data.get('proxy_url'),
         'transport': data.get('transport'),
-    }
+    }]
 
     issues = [{
         'name': md5((item['node']['uuid'] + item['issue']['message']).encode()).hexdigest(),
