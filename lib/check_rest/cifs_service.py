@@ -3,14 +3,14 @@ from . import query
 from ..utils import datetime_to_ts
 
 
-async def check_cifs_options(
+async def check_cifs_service(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
     url = '/api/protocols/cifs/services?fields=statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
-        'cifs_options': [{
+        'cifs_service': [{
             'comment': item.get('comment'),
             'default_unix_user': item.get('default_unix_user'),
             'enabled': item.get('enabled'),

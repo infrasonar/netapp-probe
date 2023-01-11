@@ -1,7 +1,8 @@
 from libprobe.probe import Probe
 from lib.check_rest.aggregate import check_aggregate
+from lib.check_rest.autosupport import check_autosupport
 from lib.check_rest.cifs import check_cifs
-from lib.check_rest.cifs_options import check_cifs_options
+from lib.check_rest.cifs_service import check_cifs_service
 from lib.check_rest.cluster_node import check_cluster_node
 from lib.check_rest.cluster_peer import check_cluster_peer
 from lib.check_rest.disk import check_disk
@@ -20,8 +21,9 @@ from lib.version import __version__ as version
 if __name__ == '__main__':
     checks = {
         'aggregate': check_aggregate,
+        'autosupport': check_autosupport,
         'cifs': check_cifs,
-        'cifs_options': check_cifs_options,
+        'cifs_service': check_cifs_service,
         'cluster_node': check_cluster_node,
         'cluster_peer': check_cluster_peer,
         'disk': check_disk,
