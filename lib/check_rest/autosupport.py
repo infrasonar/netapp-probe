@@ -12,6 +12,7 @@ async def check_autosupport(
     data = await query(asset, asset_config, check_config, url)
 
     autosupport = {
+        'name': 'autosupport',
         'contact_support': data.get('contact_support'),
         'enabled': data.get('contact_support'),
         'from': data.get('from'),
