@@ -7,7 +7,7 @@ async def check_lun(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/storage/luns?fields=**'
+    url = '/api/storage/luns?fields=copy,movement,statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
         'lun': [{
@@ -36,21 +36,6 @@ async def check_lun(
             'location_qtree_name': item.get('location', {}).get('qtree', {}).get('name'),
             'location_volume_name': item.get('location', {}).get('volume', {}).get('name'),
             'location_volume_uuid': item.get('location', {}).get('volume', {}).get('uuid'),
-            'metric_duration': item.get('metric', {}).get('duration'),
-            'metric_iops_other': item.get('metric', {}).get('iops', {}).get('other'),
-            'metric_iops_read': item.get('metric', {}).get('iops', {}).get('read'),
-            'metric_iops_total': item.get('metric', {}).get('iops', {}).get('total'),
-            'metric_iops_write': item.get('metric', {}).get('iops', {}).get('write'),
-            'metric_latency_other': item.get('metric', {}).get('latency', {}).get('other'),
-            'metric_latency_read': item.get('metric', {}).get('latency', {}).get('read'),
-            'metric_latency_total': item.get('metric', {}).get('latency', {}).get('total'),
-            'metric_latency_write': item.get('metric', {}).get('latency', {}).get('write'),
-            'metric_status': item.get('metric', {}).get('status'),
-            'metric_throughput_other': item.get('metric', {}).get('throughput', {}).get('other'),
-            'metric_throughput_read': item.get('metric', {}).get('throughput', {}).get('read'),
-            'metric_throughput_total': item.get('metric', {}).get('throughput', {}).get('total'),
-            'metric_throughput_write': item.get('metric', {}).get('throughput', {}).get('write'),
-            'metric_timestamp': datetime_to_ts(item.get('metric', {}).get('timestamp')),  # 9.7
             'movement_max_throughput': item.get('movement', {}).get('max_throughput'),
             'movement_paths_destination': item.get('movement', {}).get('paths', {}).get('destination'),
             'movement_paths_source': item.get('movement', {}).get('paths', {}).get('source'),

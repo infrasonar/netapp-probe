@@ -7,7 +7,7 @@ async def check_interface_port(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/network/ethernet/ports?fields=**'
+    url = '/api/network/ethernet/ports?fields=statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
         'port': [{
@@ -16,12 +16,6 @@ async def check_interface_port(
             'broadcast_domain_uuid': item.get('broadcast_domain', {}).get('uuid'),
             'enabled': item.get('enabled'),
             'mac_address': item.get('mac_address'),
-            'metric_duration': item.get('metric', {}).get('duration'),
-            'metric_status': item.get('metric', {}).get('status'),
-            'metric_throughput_read': item.get('metric', {}).get('throughput', {}).get('read'),
-            'metric_throughput_total': item.get('metric', {}).get('throughput', {}).get('total'),
-            'metric_throughput_write': item.get('metric', {}).get('throughput', {}).get('write'),
-            'metric_timestamp': datetime_to_ts(item.get('metric', {}).get('timestamp')),  # 9.8
             'mtu': item.get('mtu'),
             'name': item.get('name'),
             'node_name': item.get('node', {}).get('name'),

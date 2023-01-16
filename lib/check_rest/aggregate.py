@@ -7,7 +7,7 @@ async def check_aggregate(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/storage/aggregates?fields=**'
+    url = '/api/storage/aggregates?fields=statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
         'aggregate': [{
@@ -27,21 +27,6 @@ async def check_aggregate(
             'home_node_name': item.get('home_node', {}).get('name'),
             'home_node_uuid': item.get('home_node', {}).get('uuid'),
             'inactive_data_reporting_enabled': item.get('inactive_data_reporting', {}).get('enabled'),  # 9.8
-            'metric_duration': item.get('metric', {}).get('duration'),
-            'metric_iops_other': item.get('metric', {}).get('iops', {}).get('other'),
-            'metric_iops_read': item.get('metric', {}).get('iops', {}).get('read'),
-            'metric_iops_total': item.get('metric', {}).get('iops', {}).get('total'),
-            'metric_iops_write': item.get('metric', {}).get('iops', {}).get('write'),
-            'metric_latency_other': item.get('metric', {}).get('latency', {}).get('other'),
-            'metric_latency_read': item.get('metric', {}).get('latency', {}).get('read'),
-            'metric_latency_total': item.get('metric', {}).get('latency', {}).get('total'),
-            'metric_latency_write': item.get('metric', {}).get('latency', {}).get('write'),
-            'metric_status': item.get('metric', {}).get('status'),
-            'metric_throughput_other': item.get('metric', {}).get('throughput', {}).get('other'),
-            'metric_throughput_read': item.get('metric', {}).get('throughput', {}).get('read'),
-            'metric_throughput_total': item.get('metric', {}).get('throughput', {}).get('total'),
-            'metric_throughput_write': item.get('metric', {}).get('throughput', {}).get('write'),
-            'metric_timestamp': datetime_to_ts(item.get('metric', {}).get('timestamp')),  # 9.7
             'name': item.get('name'),
             'node_name': item.get('node', {}).get('name'),
             'node_uuid': item.get('node', {}).get('uuid'),
