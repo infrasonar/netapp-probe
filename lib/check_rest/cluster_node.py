@@ -3,11 +3,20 @@ from . import query
 from ..utils import datetime_to_ts
 
 
+def statistics_processor_utilization(item: dict):
+    val = item.get('statistics', {}).get('processor_utilization_raw')
+    base = item.get('statistics', {}).get('processor_utilization_base')
+    try:
+        return round(val / base * 100)
+    except Exception:
+        return None
+
+
 async def check_cluster_node(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/cluster/nodes?fields=**'
+    url = '/api/cluster/nodes?fields=metric,statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
         'cluster_node': [{
@@ -37,6 +46,7 @@ async def check_cluster_node(
             'service_processor_ipv6_interface_enabled': item.get('service_processor', {}).get('ipv6_interface', {}).get('enabled'),
             'service_processor_state': item.get('service_processor', {}).get('state'),
             'state': item.get('state'),  # 9.7
+            'statistics_processor_utilization': statistics_processor_utilization(item),
             'statistics_processor_utilization_base': item.get('statistics', {}).get('processor_utilization_base'),
             'statistics_processor_utilization_raw': item.get('statistics', {}).get('processor_utilization_raw'),
             'statistics_status': item.get('statistics', {}).get('status'),

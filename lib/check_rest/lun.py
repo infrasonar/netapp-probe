@@ -7,7 +7,7 @@ async def check_lun(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/storage/luns?fields=copy,movement,statistics,*'
+    url = '/api/storage/luns?fields=statistics,*'
     data = await query(asset, asset_config, check_config, url)
     return {
         'lun': [{
@@ -20,13 +20,6 @@ async def check_lun(
             'consistency_group_uuid': item.get('consistency_group', {}).get('uuid'),  # 9.10
             'convert_namespace_name': item.get('convert', {}).get('namespace', {}).get('name'),
             'convert_namespace_uuid': item.get('convert', {}).get('namespace', {}).get('uuid'),  # 9.11
-            'copy_source_max_throughput': item.get('copy', {}).get('source', {}).get('max_throughput'),
-            'copy_source_name': item.get('copy', {}).get('source', {}).get('name'),
-            'copy_source_progress_elapsed': item.get('copy', {}).get('source', {}).get('progress', {}).get('elapsed'),
-            'copy_source_progress_percent_complete': item.get('copy', {}).get('source', {}).get('progress', {}).get('percent_complete'),
-            'copy_source_progress_state': item.get('copy', {}).get('source', {}).get('progress', {}).get('state'),
-            'copy_source_progress_volume_snapshot_blocked': item.get('copy', {}).get('source', {}).get('progress', {}).get('volume_snapshot_blocked'),
-            'copy_source_uuid': item.get('copy', {}).get('source', {}).get('uuid'),  # 9.10
             'create_time': datetime_to_ts(item.get('create_time')),  # 9.7
             'enabled': item.get('enabled'),
             'location_logical_unit': item.get('location', {}).get('logical_unit'),
@@ -36,13 +29,6 @@ async def check_lun(
             'location_qtree_name': item.get('location', {}).get('qtree', {}).get('name'),
             'location_volume_name': item.get('location', {}).get('volume', {}).get('name'),
             'location_volume_uuid': item.get('location', {}).get('volume', {}).get('uuid'),
-            'movement_max_throughput': item.get('movement', {}).get('max_throughput'),
-            'movement_paths_destination': item.get('movement', {}).get('paths', {}).get('destination'),
-            'movement_paths_source': item.get('movement', {}).get('paths', {}).get('source'),
-            'movement_progress_elapsed': item.get('movement', {}).get('progress', {}).get('elapsed'),
-            'movement_progress_percent_complete': item.get('movement', {}).get('progress', {}).get('percent_complete'),
-            'movement_progress_state': item.get('movement', {}).get('progress', {}).get('state'),
-            'movement_progress_volume_snapshot_blocked': item.get('movement', {}).get('progress', {}).get('volume_snapshot_blocked'),
             'name': item.get('name'),
             'os_type': item.get('os_type'),
             'qos_policy_name': item.get('qos_policy', {}).get('name'),
