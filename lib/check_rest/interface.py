@@ -7,7 +7,8 @@ async def check_interface(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/network/ip/interfaces?fields=statistics,*'
+    # use fields=** for compatibilty with older versions
+    url = '/api/network/ip/interfaces?fields=**'
     data = await query(asset, asset_config, check_config, url)
     return {
         'interface': [{

@@ -7,7 +7,8 @@ async def check_interface_port(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/network/ethernet/ports?fields=statistics,*'
+    # use fields=** for compatibilty with older versions
+    url = '/api/network/ethernet/ports?fields=**'
     data = await query(asset, asset_config, check_config, url)
     return {
         'port': [{

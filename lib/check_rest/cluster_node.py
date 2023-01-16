@@ -16,7 +16,8 @@ async def check_cluster_node(
         asset: Asset,
         asset_config: dict,
         check_config: dict) -> dict:
-    url = '/api/cluster/nodes?fields=metric,statistics,*'
+    # use fields=** for compatibilty with older versions
+    url = '/api/cluster/nodes?fields=**'
     data = await query(asset, asset_config, check_config, url)
     return {
         'cluster_node': [{
