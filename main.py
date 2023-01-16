@@ -12,6 +12,7 @@ from lib.check_rest.interface_port import check_interface_port
 from lib.check_rest.lun import check_lun
 from lib.check_rest.qtree import check_qtree
 from lib.check_rest.snapmirror import check_snapmirror
+from lib.check_rest.system import check_system
 from lib.check_rest.volume import check_volume
 from lib.check_rest.volume_snapshot import check_volume_snapshot
 from lib.check_rest.vserver import check_vserver
@@ -33,6 +34,7 @@ if __name__ == '__main__':
         'lun': check_lun,
         'qtree': check_qtree,
         'snapmirror': check_snapmirror,
+        'system': check_system,
         'volume': check_volume,
         'volume_snapshot': check_volume_snapshot,
         'vserver': check_vserver,
