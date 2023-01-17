@@ -65,18 +65,10 @@ async def check_aggregate(
             'state': item.get('state'),
             'statistics_iops_raw_other': item.get('statistics', {}).get('iops_raw', {}).get('other'),
             'statistics_iops_raw_read': item.get('statistics', {}).get('iops_raw', {}).get('read'),
-            'statistics_iops_raw_total': item.get('statistics', {}).get('iops_raw', {}).get('total'),
             'statistics_iops_raw_write': item.get('statistics', {}).get('iops_raw', {}).get('write'),
-            'statistics_latency_raw_other': item.get('statistics', {}).get('latency_raw', {}).get('other'),
-            'statistics_latency_raw_read': item.get('statistics', {}).get('latency_raw', {}).get('read'),
-            'statistics_latency_raw_total': item.get('statistics', {}).get('latency_raw', {}).get('total'),
-            'statistics_latency_raw_write': item.get('statistics', {}).get('latency_raw', {}).get('write'),
-            'statistics_status': item.get('statistics', {}).get('status'),
             'statistics_throughput_raw_other': item.get('statistics', {}).get('throughput_raw', {}).get('other'),
             'statistics_throughput_raw_read': item.get('statistics', {}).get('throughput_raw', {}).get('read'),
-            'statistics_throughput_raw_total': item.get('statistics', {}).get('throughput_raw', {}).get('total'),
             'statistics_throughput_raw_write': item.get('statistics', {}).get('throughput_raw', {}).get('write'),
-            'statistics_timestamp': datetime_to_ts(item.get('statistics', {}).get('timestamp')),  # 9.7
             'uuid': item.get('uuid'),
         } for item in data['records']],
     }

@@ -1,6 +1,5 @@
 from libprobe.asset import Asset
 from . import query
-from ..utils import datetime_to_ts
 
 
 async def check_interface_port(
@@ -28,15 +27,11 @@ async def check_interface_port(
             'statistics_device_receive_raw_discards': item.get('statistics', {}).get('device', {}).get('receive_raw', {}).get('discards'),
             'statistics_device_receive_raw_errors': item.get('statistics', {}).get('device', {}).get('receive_raw', {}).get('errors'),
             'statistics_device_receive_raw_packets': item.get('statistics', {}).get('device', {}).get('receive_raw', {}).get('packets'),
-            'statistics_device_timestamp': datetime_to_ts(item.get('statistics', {}).get('device', {}).get('timestamp')),
             'statistics_device_transmit_raw_discards': item.get('statistics', {}).get('device', {}).get('transmit_raw', {}).get('discards'),
             'statistics_device_transmit_raw_errors': item.get('statistics', {}).get('device', {}).get('transmit_raw', {}).get('errors'),
             'statistics_device_transmit_raw_packets': item.get('statistics', {}).get('device', {}).get('transmit_raw', {}).get('packets'),
-            'statistics_status': item.get('statistics', {}).get('status'),
             'statistics_throughput_raw_read': item.get('statistics', {}).get('throughput_raw', {}).get('read'),
-            'statistics_throughput_raw_total': item.get('statistics', {}).get('throughput_raw', {}).get('total'),
             'statistics_throughput_raw_write': item.get('statistics', {}).get('throughput_raw', {}).get('write'),
-            'statistics_timestamp': datetime_to_ts(item.get('statistics', {}).get('timestamp')),  # 9.8
             'type': item.get('type'),
             'uuid': item.get('uuid'),
         } for item in data['records']]

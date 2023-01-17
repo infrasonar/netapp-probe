@@ -36,8 +36,6 @@ async def check_cluster_node(
             'membership': item.get('membership'),
             'metric_duration': item.get('metric', {}).get('duration'),
             'metric_processor_utilization': item.get('metric', {}).get('processor_utilization'),
-            'metric_status': item.get('metric', {}).get('status'),
-            'metric_timestamp': datetime_to_ts(item.get('metric', {}).get('timestamp')),  # 9.8
             'model': item.get('model'),
             'name': item.get('name'),
             'nvram_battery_state': item.get('nvram', {}).get('battery_state'),
@@ -50,8 +48,6 @@ async def check_cluster_node(
             'statistics_processor_utilization': statistics_processor_utilization(item),
             'statistics_processor_utilization_base': item.get('statistics', {}).get('processor_utilization_base'),
             'statistics_processor_utilization_raw': item.get('statistics', {}).get('processor_utilization_raw'),
-            'statistics_status': item.get('statistics', {}).get('status'),
-            'statistics_timestamp': datetime_to_ts(item.get('statistics', {}).get('timestamp')),  # 9.8
             'storage_configuration': item.get('storage_configuration'),  # 9.9
             'system_id': item.get('system_id'),  # 9.7
             'uptime': item.get('uptime'),

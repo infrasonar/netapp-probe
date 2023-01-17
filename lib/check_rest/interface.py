@@ -1,6 +1,5 @@
 from libprobe.asset import Asset
 from . import query
-from ..utils import datetime_to_ts
 
 
 async def check_interface(
@@ -37,11 +36,8 @@ async def check_interface(
             'service_policy_name': item.get('service_policy', {}).get('name'),
             'service_policy_uuid': item.get('service_policy', {}).get('uuid'),
             'state': item.get('state'),
-            'statistics_status': item.get('statistics', {}).get('status'),
             'statistics_throughput_raw_read': item.get('statistics', {}).get('throughput_raw', {}).get('read'),
-            'statistics_throughput_raw_total': item.get('statistics', {}).get('throughput_raw', {}).get('total'),
             'statistics_throughput_raw_write': item.get('statistics', {}).get('throughput_raw', {}).get('write'),
-            'statistics_timestamp': datetime_to_ts(item.get('statistics', {}).get('timestamp')),  # 9.8
             'uuid': item.get('uuid'),
             'vip': item.get('vip'),
         } for item in data['records']]
