@@ -1,6 +1,6 @@
 import asyncio
 from libprobe.asset import Asset
-from . import query
+from ..netappquery import query
 from ..utils import datetime_to_ts
 
 THROTTLE = .2
@@ -15,7 +15,8 @@ async def check_volume_snapshot(
     snapshots = []
     for item in res['records']:
         await asyncio.sleep(THROTTLE)
-        url = item['_links']['self']['href'] + '/snapshots?order_by=create_time'
+        volume_url = item['_links']['self']['href']
+        url = f'{volume_url}/snapshots?order_by=create_time'
         snapshots_res = await query(asset, asset_config, check_config, url)
         if snapshots_res['num_records'] == 0:
             continue

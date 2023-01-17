@@ -1,6 +1,6 @@
-from libprobe.asset import Asset
-from . import query
 from hashlib import md5
+from libprobe.asset import Asset
+from ..netappquery import query
 
 
 async def check_autosupport(
@@ -22,9 +22,12 @@ async def check_autosupport(
     }]
 
     issues = [{
-        'name': md5((item['node']['uuid'] + item['issue']['message']).encode()).hexdigest(),
-        'corrective_action_code': item.get('corrective_action', {}).get('code'),
-        'corrective_action_message': item.get('corrective_action', {}).get('message'),
+        'name': md5((item['node']['uuid'] + item['issue']['message']).encode()
+                    ).hexdigest(),
+        'corrective_action_code':
+        item.get('corrective_action', {}).get('code'),
+        'corrective_action_message':
+        item.get('corrective_action', {}).get('message'),
         'issue_code': item.get('issue', {}).get('code'),
         'issue_message': item.get('issue', {}).get('message'),
         'node_name': item.get('node', {}).get('name'),
