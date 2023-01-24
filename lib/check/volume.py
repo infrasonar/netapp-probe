@@ -4,10 +4,10 @@ from ..utils import datetime_to_ts
 
 
 def space_percent_used(item: dict):
-    available = item.get('space', {}).get('available')
+    used = item.get('space', {}).get('used')
     size = item.get('space', {}).get('size')
     try:
-        return round((1 - available / size) * 100)
+        return round(used / size * 100)
     except Exception:
         return None
 
