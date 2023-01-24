@@ -3,6 +3,15 @@ from ..netappquery import query
 from ..utils import datetime_to_ts
 
 
+def space_percent_used(item: dict):
+    used = item.get('space', {}).get('used')
+    size = item.get('space', {}).get('size')
+    try:
+        return round(used / size * 100)
+    except Exception:
+        return None
+
+
 async def check_lun(
         asset: Asset,
         asset_config: dict,
@@ -54,6 +63,7 @@ async def check_lun(
             'space_scsi_thin_provisioning_support_enabled':
             item.get('space', {}).get(
                 'scsi_thin_provisioning_support_enabled'),
+            'space_percent_used': space_percent_used(item),
             'space_size': item.get('space', {}).get('size'),
             'space_used': item.get('space', {}).get('used'),
             'statistics_iops_raw_other':
