@@ -3,6 +3,15 @@ from ..netappquery import query
 from ..utils import datetime_to_ts
 
 
+def space_block_storage_used_percent(item: dict):
+    used = item.get('space', {}).get('block_storage', {}).get('used')
+    size = item.get('space', {}).get('block_storage', {}).get('size')
+    try:
+        return round((used / size) * 100)
+    except Exception:
+        return None
+
+
 async def check_aggregate(
         asset: Asset,
         asset_config: dict,
@@ -79,6 +88,8 @@ async def check_aggregate(
             item.get('space', {}).get('block_storage', {}).get('size'),
             'space_block_storage_used':
             item.get('space', {}).get('block_storage', {}).get('used'),
+            'space_block_storage_used_percent':
+            space_block_storage_used_percent(item),
             'space_block_storage_volume_deduplication_shared_count':
             item.get('space', {}).get('block_storage', {}).get(
                 'volume_deduplication_shared_count'),  # 9.10
