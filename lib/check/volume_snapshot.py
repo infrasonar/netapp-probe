@@ -31,6 +31,7 @@ async def check_volume_snapshot(
             'oldest_create_time': snapshots_ts[0],
             'oldest_name': snapshots_res['records'][0]['name'],
             'max_snapshot_diff': max_diff,
+            'snapshot_count': len(snapshots_res)
         })
     return {
         'snapshot': snapshots

@@ -1,6 +1,6 @@
 from libprobe.asset import Asset
 from ..netappquery import query
-from ..utils import datetime_to_ts
+from ..utils import datetime_to_ts, duration_to_sec
 
 
 async def check_snapmirror(
@@ -16,7 +16,7 @@ async def check_snapmirror(
             'group_type': item.get('group_type'),  # 9.11
             'healthy': item.get('healthy'),
             'identity_preservation': item.get('identity_preservation'),  # 9.11
-            'lag_time': item.get('lag_time'),
+            'lag_time': duration_to_sec(item.get('lag_time')),
             'last_transfer_type': item.get('last_transfer_type'),  # 9.11
             'policy_name': item.get('policy', {}).get('name'),
             'policy_type': item.get('policy', {}).get('type'),
@@ -35,7 +35,7 @@ async def check_snapmirror(
             'transfer_state':
             item.get('transfer', {}).get('state'),
             'transfer_total_duration':
-            item.get('transfer', {}).get('total_duration'),
+            duration_to_sec(item.get('transfer', {}).get('total_duration')),
             'transfer_uuid':
             item.get('transfer', {}).get('uuid'),
             'transfer_schedule_name':
