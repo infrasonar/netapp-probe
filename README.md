@@ -22,3 +22,50 @@ Variable            | Default                        | Description
 ```
 docker build -t netapp-probe . --no-cache
 ```
+
+## Config
+
+```yaml
+netapp:
+  config:
+    username: my_account
+    password:
+      secret: my_account_password
+```
+
+## Dry run
+
+Available checks:
+- `aggregate`
+- `autosupport`
+- `cifs`
+- `cifs_service`
+- `cluster_node`
+- `cluster_peer`
+- `disk`
+- `fcp`
+- `interface`
+- `interface_port`
+- `lun`
+- `qtree`
+- `snapmirror`
+- `system`
+- `volume`
+- `volume_snapshot`
+- `vserver`
+
+Create a yaml file, for example _(test.yaml)_:
+
+```yaml
+asset:
+  name: "foo.local"
+  check: "system"
+  config:
+    address: "192.168.1.2"
+```
+
+Run the probe with the `DRY_RUN` environment variable set the the yaml file above.
+
+```
+DRY_RUN=test.yaml python main.py
+```
