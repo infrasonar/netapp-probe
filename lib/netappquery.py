@@ -2,7 +2,7 @@ import aiohttp
 import base64
 import logging
 from libprobe.asset import Asset
-from libprobe.exceptions import IgnoreResultException
+from libprobe.exceptions import IgnoreResultException, CheckException
 from typing import List, Dict
 
 
@@ -34,6 +34,10 @@ async def query(
         async with session.get(url,
                                headers=headers,
                                ssl=False) as resp:
-            data = await resp.json(content_type='application/hal+json')
-            resp.raise_for_status()
+            # we use strict content_type hal+json
+            # 400 exeptions will fail this check
+            if resp.ok:  # status < 400
+                data = await resp.json(content_type='application/hal+json')
+            else:
+                raise CheckException(f'{resp.status}: {resp.reason}')
             return data
