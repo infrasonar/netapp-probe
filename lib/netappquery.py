@@ -39,5 +39,6 @@ async def query(
             if resp.ok:  # status < 400
                 data = await resp.json(content_type='application/hal+json')
             else:
-                raise CheckException(f'{resp.status}: {resp.reason}')
+                raise CheckException(
+                    f'failed to read response: {resp.reason} ({resp.status})')
             return data
