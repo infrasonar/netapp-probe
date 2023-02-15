@@ -28,9 +28,8 @@ docker build -t netapp-probe . --no-cache
 ```yaml
 netapp:
   config:
-    username: my_account
-    password:
-      secret: my_account_password
+    username: "my_username"
+    password: "my_password"
 ```
 
 ## Dry run
