@@ -25,6 +25,7 @@ async def check_disk(
             'node_name': item.get('node', {}).get('name'),
             'node_uuid': item.get('node', {}).get('uuid'),
             'pool': item.get('pool'),
+            'rated_life_used_percent': item.get('rated_life_used_percent'),
             'rpm': item.get('rpm'),
             'sector_count': item.get('sector_count'),   # 9.9
             'self_encrypting': item.get('self_encrypting'),   # 9.7
