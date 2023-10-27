@@ -44,6 +44,7 @@ Available checks:
 - `cluster_node`
 - `cluster_peer`
 - `disk`
+- `disk_wear`
 - `fcp`
 - `interface`
 - `interface_port`
