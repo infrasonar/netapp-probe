@@ -6,7 +6,6 @@ from lib.check.cifs_service import check_cifs_service
 from lib.check.cluster_node import check_cluster_node
 from lib.check.cluster_peer import check_cluster_peer
 from lib.check.disk import check_disk
-from lib.check.disk_wear import check_disk_wear
 from lib.check.fcp import check_fcp
 from lib.check.interface import check_interface
 from lib.check.interface_port import check_interface_port
@@ -29,7 +28,6 @@ if __name__ == '__main__':
         'cluster_node': check_cluster_node,
         'cluster_peer': check_cluster_peer,
         'disk': check_disk,
-        'disk_wear': check_disk_wear,
         'fcp': check_fcp,
         'interface': check_interface,
         'interface_port': check_interface_port,
