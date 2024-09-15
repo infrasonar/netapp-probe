@@ -10,7 +10,7 @@ async def query(
         asset: Asset,
         asset_config: dict,
         check_config: dict,
-        route: str) -> List[Dict]:
+        route: str) -> dict:
 
     address = check_config.get('address')
     if not address:

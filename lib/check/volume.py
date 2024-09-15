@@ -7,7 +7,7 @@ def space_percent_used(item: dict):
     used = item.get('space', {}).get('used')
     size = item.get('space', {}).get('size')
     try:
-        return round(used / size * 100)
+        return round(used / size * 100)  # type: ignore
     except Exception:
         return None
 

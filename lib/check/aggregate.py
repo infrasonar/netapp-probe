@@ -7,7 +7,7 @@ def space_block_storage_used_percent(item: dict):
     used = item.get('space', {}).get('block_storage', {}).get('used')
     size = item.get('space', {}).get('block_storage', {}).get('size')
     try:
-        return round((used / size) * 100)
+        return round((used / size) * 100)  # type: ignore
     except Exception:
         return None
 
