@@ -4,6 +4,7 @@ import logging
 from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
 from typing import List, Dict
+from . import DOCS_URL
 
 
 async def query(
@@ -18,7 +19,10 @@ async def query(
     username = asset_config.get('username')
     password = asset_config.get('password')
     if None in (username, password):
-        raise CheckException('missing credentials')
+        raise CheckException(
+            'Missing credentials. Please refer to the following documentation'
+            f' for detailed instructions: <{DOCS_URL}>'
+        )
 
     url = f'https://{address}{route}'
 
