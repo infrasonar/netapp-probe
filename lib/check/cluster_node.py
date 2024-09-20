@@ -7,7 +7,9 @@ def statistics_processor_utilization(item: dict):
     val = item.get('statistics', {}).get('processor_utilization_raw')
     base = item.get('statistics', {}).get('processor_utilization_base')
     try:
-        return round(val / base * 100)  # type: ignore
+        assert isinstance(val, (float, int))
+        assert isinstance(base, (float, int))
+        return round(val / base * 100)
     except Exception:
         return None
 
