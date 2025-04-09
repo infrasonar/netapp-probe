@@ -22,8 +22,13 @@ async def check_volume_snapshot(
             continue
         snapshots_ts = [
             datetime_to_ts(a['create_time']) for a in snapshots_res['records']]
-        max_diff = max(a - b for a, b in zip(snapshots_ts[1:], snapshots_ts)) \
-            if len(snapshots_ts) > 1 else None
+        try:
+            max_diff = max(
+                a - b
+                for a, b in zip(snapshots_ts[1:], snapshots_ts)
+                if a is not None and b is not None)
+        except ValueError:
+            max_diff = None
         snapshots.append({
             'name': item['name'],
             'newest_create_time': snapshots_ts[-1],

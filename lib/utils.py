@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 
-def datetime_to_ts(ds: Optional[str]) -> int:
+def datetime_to_ts(ds: Optional[str]) -> Optional[int]:
     if ds is None:
         return
     try:
@@ -11,7 +11,7 @@ def datetime_to_ts(ds: Optional[str]) -> int:
         return
 
 
-def duration_to_sec(ds: Optional[str]):
+def duration_to_sec(ds: Optional[str]) -> Optional[int]:
     '''
     iso 8601 duration string
 

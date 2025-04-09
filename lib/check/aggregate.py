@@ -7,6 +7,8 @@ def space_block_storage_used_percent(item: dict):
     used = item.get('space', {}).get('block_storage', {}).get('used')
     size = item.get('space', {}).get('block_storage', {}).get('size')
     try:
+        assert isinstance(used, (float, int))
+        assert isinstance(size, (float, int))
         return round((used / size) * 100)
     except Exception:
         return None
