@@ -5,6 +5,7 @@ from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
 from typing import List, Dict
 from . import DOCS_URL
+from .connector import get_connector
 
 
 async def query(
@@ -58,7 +59,7 @@ async def query(
     records = []  # used for pagination when applicable
 
     while True:
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(connector=get_connector()) as session:
             async with session.get(url,
                                    headers=headers,
                                    ssl=False) as resp:
