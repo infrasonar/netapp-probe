@@ -35,7 +35,7 @@ class CheckAutosupport(Check):
             'issue_message': item.get('issue', {}).get('message'),
             'node_name': item.get('node', {}).get('name'),
             'node_uuid': item.get('node', {}).get('uuid'),
-        } for item in data['issues']]
+        } for item in data.get('issues', [])]
 
         return {
             'autosupport': autosupport,
