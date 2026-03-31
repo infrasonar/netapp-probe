@@ -17,6 +17,7 @@ def statistics_processor_utilization(item: dict):
 
 class CheckClusterNode(Check):
     key = 'cluster_node'
+    unchanged_eol = 0
 
     @staticmethod
     async def run(asset: Asset, local_config: dict, config: dict) -> dict:

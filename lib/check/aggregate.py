@@ -17,6 +17,7 @@ def space_block_storage_used_percent(item: dict):
 
 class CheckAggregate(Check):
     key = 'aggregate'
+    unchanged_eol = 0
 
     @staticmethod
     async def run(asset: Asset, local_config: dict, config: dict) -> dict:
