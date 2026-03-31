@@ -6,6 +6,7 @@ from ..netappquery import query
 
 class CheckAutosupport(Check):
     key = 'autosupport'
+    unchanged_eol = 14400
 
     @staticmethod
     async def run(asset: Asset, local_config: dict, config: dict) -> dict:

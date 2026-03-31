@@ -6,6 +6,7 @@ from ..utils import datetime_to_ts, duration_to_sec
 
 class CheckSnapmirror(Check):
     key = 'snapmirror'
+    unchanged_eol = 14400
 
     @staticmethod
     async def run(asset: Asset, local_config: dict, config: dict) -> dict:

@@ -6,6 +6,7 @@ from ..utils import datetime_to_ts
 
 class CheckClusterPeer(Check):
     key = 'cluster_peer'
+    unchanged_eol = 0
 
     @staticmethod
     async def run(asset: Asset, local_config: dict, config: dict) -> dict:
