@@ -3,7 +3,6 @@ import base64
 import logging
 from libprobe.asset import Asset
 from libprobe.exceptions import CheckException
-from typing import List, Dict
 from . import DOCS_URL
 from .connector import get_connector
 
